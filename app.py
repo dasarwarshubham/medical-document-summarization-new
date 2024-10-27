@@ -177,7 +177,7 @@ def generate_summary(documents, selected_model, prompt):
                 ]
                 summary_text = ""
                 # Open AI GPT
-                if selected_model.get("name") == "OpenAI GPT":
+                if selected_model.get("name") == "OpenAI":
                     openai_client = OpenAI(api_key=OPENAI_API_KEY)
                     response = openai_client.chat.completions.create(
                         model=selected_model.get("model"),
@@ -197,7 +197,7 @@ def generate_summary(documents, selected_model, prompt):
                     summary_text = response.choices[0].message.content
 
                 # Anthropic
-                elif selected_model.get("name") == "Anthropic Claude":
+                elif selected_model.get("name") == "Claude":
                     anthropic_client = anthropic.Anthropic(
                         api_key=ANTHROPIC_API_KEY)
                     response = anthropic_client.messages.create(
@@ -208,7 +208,7 @@ def generate_summary(documents, selected_model, prompt):
                     summary_text = response.content[0].text
 
                 # Self-hosted
-                elif selected_model.get("name") == "Self-Hosted Model":
+                elif selected_model.get("name") == "Self-Hosted LLM":
                     model_url = "https://expert-eft-innocent.ngrok-free.app/v1"
                     self_hosted_client = OpenAI(
                         base_url=model_url, api_key='na')
